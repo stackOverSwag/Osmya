@@ -18,7 +18,6 @@ export default function Header() {
           )}
           {!isAuthenticated && (
             <>
-              <NavLink to="/gate" className={({isActive}) => isActive ? 'text-brand-600 dark:text-brand-400' : ''}>Entrer</NavLink>
               <NavLink to="/login" className={({isActive}) => isActive ? 'text-brand-600 dark:text-brand-400' : ''}>Connexion</NavLink>
               <NavLink to="/register" className={({isActive}) => isActive ? 'text-brand-600 dark:text-brand-400' : ''}>Inscription</NavLink>
             </>
