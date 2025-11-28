@@ -10,7 +10,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     if (!id) return;
-    getProduct(id)
+    getProduct(id) 
       .then(setProduct)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));

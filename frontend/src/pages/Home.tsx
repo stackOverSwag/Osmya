@@ -14,8 +14,7 @@ export default function Home() {
         </div>
       ) : (
         <div className="flex items-center justify-center gap-4">
-          <Link to="/gate" className="px-4 py-2 rounded-md bg-brand-600 text-white hover:bg-brand-700">Entrer</Link>
-          <Link to="/login" className="px-4 py-2 rounded-md border border-brand-600 text-brand-700 dark:text-brand-300">Se connecter</Link>
+          <Link to="/login" className="px-4 py-2 rounded-md bg-brand-600 text-white hover:bg-brand-700">Se connecter</Link>
           <Link to="/register" className="px-4 py-2 rounded-md border border-brand-600 text-brand-700 dark:text-brand-300">S’inscrire</Link>
         </div>
       )}

@@ -45,10 +45,10 @@ public class AuthController {
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
         User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) { // VERIFY hash
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect password");
         }
 
         String token = jwtService.generateToken(user.getUsername(), user.getRole());

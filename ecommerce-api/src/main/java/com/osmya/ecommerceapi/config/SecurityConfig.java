@@ -40,31 +40,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        // Public endpoints
-                        .requestMatchers("/health").permitAll()
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
-
-                        // GraphQL endpoints (public for now, secure later if needed)
-                        .requestMatchers("/graphiql", "/graphiql/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/graphql").permitAll()
-
-                        // Products
-                        .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/products/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/products/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
-
-                        // Users: only ADMIN
-                        .requestMatchers("/users/**").hasRole("ADMIN")
-
-                        // Internal service-to-service endpoints: only SERVICE (API key)
-                        .requestMatchers("/internal/**").hasRole("SERVICE")
-
-                        // anything else: must be authenticated
-                        .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
                 // H2 console in a frame
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 // Filters: API key and JWT before UsernamePasswordAuthenticationFilter
